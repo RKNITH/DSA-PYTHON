@@ -450,5 +450,119 @@
 
 
 
-#  Q 21: 
+#  Q 21: Power Set - Given an integer array of unique elements, return all possible subsets (the power set). The solution set must not contain duplicate subsets. Return the solution in any order.
+
+# def backtrack(start,path, nums, result ):
+#     result.append(path[:])
+#     for i in range(start, len(nums)):
+#         path.append(nums[i])
+#         backtrack(i+1, path, nums, result)
+
+#         path.pop()
+
+# def power_set(nums):
+#     result =[]
+#     backtrack(0, [], nums, result)
+#     return result
+
+
+# nums = [1, 2, 3]
+# print(power_set(nums))       
+
+
+#  Q 22: Given an integer array nums that may contain duplicates, return all possible subsets (the power set).
+# The solution set must not contain duplicate subsets. Return the solution in any order.
+
+# def subsetsWithDup(nums):
+#     def backtrack(start, path):
+#         result.append(path[:])  # Add a copy of the current subset (path) to the result
+#         for i in range(start, len(nums)):
+#             # If the current element is the same as the previous element, and it is not at the start of this subset, skip it
+#             if i > start and nums[i] == nums[i - 1]:
+#                 continue
+#             # Include the current element and move forward to explore further subsets
+#             path.append(nums[i])
+#             backtrack(i + 1, path)
+#             path.pop()  # Backtrack by removing the last element to explore other possibilities
+
+#     nums.sort()  # Sort the input array to handle duplicates
+#     result = []
+#     backtrack(0, [])
+#     return result
+
+
+# nums = [1, 2, 2]
+# print(subsetsWithDup(nums))
+
+
+
+# Q 23: Given two integers n and k, return all possible combinations of k numbers chosen from the range [1, n].
+# You may return the answer in any order.
+
+# METHOD 1:
+
+# from itertools import combinations
+# a=[1,2,3]
+# b=combinations(a, 2)
+# print(list(b))
+
+# METHOD: 2
+
+# def combine(n, k):
+#     def backtrack(start, path):
+#         # If the combination is of the right length, add it to the result
+#         if len(path) == k:
+#             result.append(path[:])
+#             return
+        
+#         # Explore further by adding more elements to the current path
+#         for i in range(start, n + 1):
+#             path.append(i)
+#             backtrack(i + 1, path)
+#             path.pop()  # Backtrack by removing the last element to explore other possibilities
+    
+#     result = []
+#     backtrack(1, [])
+#     return result
+
+# print(combine(3, 2))
+
+
+# Q 24: Given an array of distinct integers candidates and a target integer target, return a list of all unique combinations of candidates where the chosen numbers sum to target. You may return the combinations in any order.
+# The same number may be chosen from candidates an unlimited number of times. Two combinations are unique if the frequency of at least one of the chosen numbers is different.
+
+# (the integers in the candidates array are all non negative )
+
+# def combinationSum(candidates, target):
+#     result = []
+    
+#     def backtrack(remaining, path, start):
+#         # Base case: if remaining target is 0, we found a combination
+#         if remaining == 0:
+#             result.append(path[:])
+#             return
+        
+#         # Iterate over candidates, starting from the current index
+#         for i in range(start, len(candidates)):
+#             candidate = candidates[i]
+            
+#             # Skip if the candidate is greater than the remaining target
+#             if candidate > remaining:
+#                 continue
+            
+#             # Choose the candidate, and reduce the remaining target
+#             path.append(candidate)
+#             backtrack(remaining - candidate, path, i)  # not i + 1 because we can reuse the same element
+#             path.pop()  # Backtrack
+    
+#     # Start the backtracking with an empty path and the full target
+#     backtrack(target, [], 0)
+#     return result
+
+# # Example usage
+# candidates = [1, 2, 3, 4]
+# target = 7
+# print(combinationSum(candidates, target))
+
+
 
