@@ -452,6 +452,7 @@
 
 #  Q 21: Power Set - Given an integer array of unique elements, return all possible subsets (the power set). The solution set must not contain duplicate subsets. Return the solution in any order.
 
+# METHOD 1
 # def backtrack(start,path, nums, result ):
 #     result.append(path[:])
 #     for i in range(start, len(nums)):
@@ -467,7 +468,26 @@
 
 
 # nums = [1, 2, 3]
-# print(power_set(nums))       
+# print(power_set(nums))    
+# 
+# 
+# METHOD 2:
+
+# from itertools import combinations
+
+# lis =[1,2,3]
+# power_set =[]
+# for r in range(len(lis)+1):
+#     subsets =combinations(lis, r)
+#     power_set.extend(subsets)
+
+# power_set =[list(subset) for subset in power_set]
+# print(power_set)
+
+
+
+
+
 
 
 #  Q 22: Given an integer array nums that may contain duplicates, return all possible subsets (the power set).
@@ -566,3 +586,247 @@
 
 
 
+# Q 25: Given a collection of candidate numbers (candidates) and a target number (target), find all unique combinations in candidates where the candidate numbers sum to target.
+# Each number in candidates may only be used once in the combination.
+# Note: The solution set must not contain duplicate combinations.
+
+# def combinationSum2(candidates, target):
+#     candidates.sort()
+#     result =[]
+#     def backtrack(remaining, path, start):
+#         if remaining ==0:
+#             result.append(path[:])
+#             return
+#         for i in range(start, len(candidates)):
+#             if i > start and candidates[i] == candidates[i-1]:
+#                 continue
+#             candidate =candidates[i]
+
+#             if candidate > remaining:
+#                 break
+#             path.append(candidate)
+#             backtrack(remaining-candidate, path, i+1)
+#             path.pop()
+#     backtrack(target, [], 0)
+#     return result
+            
+# candidates = [3, 5, 2, 1, 3]
+# target = 7
+# print(combinationSum2(candidates, target))
+
+
+# Q 26: Find all valid combinations of k numbers that sum up to n such that the following conditions are true:
+# Only numbers 1 through 9 are used.
+# Each number is used at most once.
+# Return a list of all possible valid combinations. The list must not contain the same combination twice, and the combinations may be returned in any order.
+
+
+# def combinationSum3(k, n):
+#     result =[]
+#     def backtrack(start, path, remaining):
+#         if len(path) ==k and remaining ==0:
+#             result.append(path[:])
+#             return
+#         if len(path) > k or remaining < 0:
+#             return
+        
+#         for i in range(start,10):
+#             path.append(i)
+#             backtrack(i+1, path, remaining-i)
+#             path.pop()
+#     backtrack(1, [], n)
+#     return result
+        
+# k = 3
+# n = 6
+# print(combinationSum3(k, n))
+
+#  Q 27: SUDOKU SOLVER:
+
+# Write a program to solve a Sudoku puzzle by filling the empty cells.
+# 
+# A sudoku solution must satisfy all of the following rules:
+# 
+# Each of the digits 1-9 must occur exactly once in each row.
+# 
+# Each of the digits 1-9 must occur exactly once in each column.
+# 
+# Each of the digits 1-9 must occur exactly once in each of the 9 3x3 sub-boxes of the grid.
+# 
+# The '.' character indicates empty cells.
+# 
+# Constraints:
+# 
+# board.length == 9
+# 
+# board[i].length == 9
+# 
+# board[i][j] is a digit between 1 and 9 , inclusive or '.'.
+# 
+# It is guaranteed that the input board has only one solution.
+
+# def solveSudoku(board):
+#     def isValid(board, row, col, num):
+#         # Check if 'num' is not in the current row
+#         for i in range(9):
+#             if board[row][i] == num:
+#                 return False
+
+#         # Check if 'num' is not in the current column
+#         for i in range(9):
+#             if board[i][col] == num:
+#                 return False
+
+#         # Check if 'num' is not in the current 3x3 sub-box
+#         boxRowStart = (row // 3) * 3
+#         boxColStart = (col // 3) * 3
+#         for i in range(3):
+#             for j in range(3):
+#                 if board[boxRowStart + i][boxColStart + j] == num:
+#                     return False
+
+#         return True
+
+#     def solve(board):
+#         for row in range(9):
+#             for col in range(9):
+#                 if board[row][col] == '.':
+#                     for num in map(str, range(1, 10)):
+#                         if isValid(board, row, col, num):
+#                             board[row][col] = num
+#                             if solve(board):
+#                                 return True
+#                             board[row][col] = '.'
+#                     return False
+#         return True
+
+#     solve(board)
+
+# # Example usage:
+# board = [
+#     ["5", "3", ".", ".", "7", ".", ".", ".", "."],
+#     ["6", ".", ".", "1", "9", "5", ".", ".", "."],
+#     [".", "9", "8", ".", ".", ".", ".", "6", "."],
+#     ["8", ".", ".", ".", "6", ".", ".", ".", "3"],
+#     ["4", ".", ".", "8", ".", "3", ".", ".", "1"],
+#     ["7", ".", ".", ".", "2", ".", ".", ".", "6"],
+#     [".", "6", ".", ".", ".", ".", "2", "8", "."],
+#     [".", ".", ".", "4", "1", "9", ".", ".", "5"],
+#     [".", ".", ".", ".", "8", ".", ".", "7", "9"]
+# ]
+
+# solveSudoku(board)
+
+# # Print the solved board
+# for row in board:
+#     print(row)
+
+
+
+
+# Q 28: N-QUEENS PUZZLE:
+# The n-queens puzzle is the problem of placing n queens on an n x n chessboard such that no two queens attack each other.
+
+# Given an integer n, return all distinct solutions to the n-queens puzzle. You may return the answer in any order.
+
+# Each solution contains a distinct board configuration of the n-queens' placement, where 'Q' and '.' both indicate a queen and an empty space, respectively.
+
+
+# def solveNQueens(n):
+#     def isValid(board, row, col):
+#         # Check if a queen is already placed in the same column
+#         for i in range(row):
+#             if board[i][col] == 'Q':
+#                 return False
+
+#         # Check the upper-left diagonal
+#         for i, j in zip(range(row, -1, -1), range(col, -1, -1)):
+#             if board[i][j] == 'Q':
+#                 return False
+
+#         # Check the upper-right diagonal
+#         for i, j in zip(range(row, -1, -1), range(col, n)):
+#             if board[i][j] == 'Q':
+#                 return False
+
+#         return True
+
+#     def solve(board, row):
+#         if row == n:
+#             # All queens are placed, add the solution to the result
+#             result.append([''.join(row) for row in board])
+#             return
+
+#         for col in range(n):
+#             if isValid(board, row, col):
+#                 # Place the queen
+#                 board[row][col] = 'Q'
+#                 # Recurse to place the rest of the queens
+#                 solve(board, row + 1)
+#                 # Backtrack by removing the queen
+#                 board[row][col] = '.'
+
+#     result = []
+#     # Create the chessboard, initially filled with '.'
+#     board = [['.' for _ in range(n)] for _ in range(n)]
+#     solve(board, 0)
+#     return result
+
+
+
+# ****************** DYNAMIC PROGRAMMING START.*****************
+
+
+
+# Q 29: FIBONACCI SEQUESNCE:
+
+#  Solution 1: T=O(2^n) , S=O(n)
+# def fibonacci(n):
+#     if n==0:
+#         return 0
+#     if n==1:
+#         return 1
+#     return fibonacci(n-1) + fibonacci(n-2)
+
+# def fibo(n):
+#     for i in range(n):
+#         print(fibonacci(i), end=' ')
+
+# fibo(10)
+
+# Solution 2: T=O(n) , S=O(n)
+
+# def fibonacci(n, memo):
+#     if memo[n] is not None:
+#         return memo[n]
+#     if n==0:
+#         memo[n] =0
+#     elif n==1:
+#         memo[n] =1
+#     else:
+#         memo[n] =fibonacci(n-1, memo)+fibonacci(n-2, memo)
+#     return memo[n]
+
+# def print_fibo(n):
+#     memo=[None]*n
+#     for i in range(n):
+#         print(fibonacci(i, memo), end=' ')
+
+# print_fibo(10)
+
+
+# Solution 3: T=O(n) , S=O(1):
+
+def fibo(n):
+    if n>=0:
+        print(0, end=' ')
+    if n>=2:
+        print(1, end=' ')
+    a, b =0, 1
+
+    for i in range(2, n):
+        next_fib =a+b
+        print(next_fib, end=' ')
+        a,b =b,next_fib
+
+fibo(10)                

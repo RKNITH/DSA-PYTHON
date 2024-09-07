@@ -200,32 +200,539 @@
         
 
 
-#  FIND ALL PERMUTAION OF [1,2,2]
+# #  FIND ALL PERMUTAION OF [1,2,2]
 
-def permutaion(b):
-    result =[]
+# def permutaion(b):
+#     result =[]
 
-    def backtrack(start, end):
-        if start == end:
-            if b[:] not in result:
-                result.append(b[:])
+#     def backtrack(start, end):
+#         if start == end:
+#             if b[:] not in result:
+#                 result.append(b[:])
 
-        for i in range(start, end):
-            b[start], b[i] =b[i], b[start]
+#         for i in range(start, end):
+#             b[start], b[i] =b[i], b[start]
 
-            backtrack(start+1, end)
-            b[start], b[i] =b[i], b[start]
+#             backtrack(start+1, end)
+#             b[start], b[i] =b[i], b[start]
 
-    backtrack(0, len(b))
-    return result
+#     backtrack(0, len(b))
+#     return result
 
-b=[1,2,2]
-print(permutaion(b))
-
-
+# b=[1,2,2]
+# print(permutaion(b))
 
 
- 
+# ******************************************************************************88
+
+# sum =0
+# for i in range(101):
+#     sum +=i
+# print(sum)    
+
+
+
+# a =1234
+# print(len(str(a)))
+
+
+# sum =0
+# a=123
+# for i in str(a):
+#     sum +=int(i)
+# print(sum)    
+
+
+
+# def check_palindrone(str):
+#     return str ==str[::-1] 
+
+
+
+# print(check_palindrone('121'))
+# print(check_palindrone('123'))
+
+
+# def fibonacci(n):
+#    fibo=[]
+
+#    for i in range(11):
+#       if i ==0:
+#          fibo.append(0)
+#       elif i==1:
+#          fibo.append(1)
+#       else:
+#          fibo.append(fibo[-1]+fibo[-2]) 
+#    return fibo            
+
+# print(fibonacci(10))
+
+
+# a=[-3,-1,0,2,3]
+# b =[]
+# def sorted_array(a):
+#     for i in a:
+#         b.append(abs(i))
+
+#     c = sorted(b)
+#     d=[]
+#     for i in c:
+#         d.append(i**2)
+#     return d
+# print(sorted_array(a))    
+
+
+
+# def monotonic_array(a):
+#     if len(a)<=1:
+#         return a
+    
+#     increasing =decreasing =True
+#     for i in range(1, len(a)):
+#         if a[i] > a[i-1]:
+#             decreasing =False
+#         if a[i] < a[i-1]:
+#             increasing =False
+#     return increasing or decreasing
+
+# a=[-1,2,3,2]
+# print(monotonic_array(a))
+
+
+
+# def kth_symbol(n, k):
+#     if n==1:
+#         return 0
+#     length_of_previous_row =2**(n-2):
+
+#     if k<length_of_previous_row:
+#         return kth_symbol(n-1, k)
+#     else:
+#         return 1-kth_symbol(n-1, k-length_of_previous_row)
+    
+# print()    
+
+
+# def findWinner(n,k):
+#    a=0
+#    for i in range(2, n+1):
+#       a =(a+k)%i
+#    return a+1
+
+
+# ******************************************************
+
+# Printing natural number
+
+# def natural(n):
+#     if n>100:
+#         return
+#     print(n)
+#     natural(n+1)    
+   
+# natural(1)
+
+#  factorial of a number
+
+# def fact(n):
+#     if n<=1:
+#         return 1
+#     return n* fact(n-1)
+# print(fact(5))
+
+
+#  PRINTING 321123 PATTERN
+
+# def pattern(n):
+#     if n==0:
+#         return 
+#     print(n, end='')
+#     pattern(n-1)
+#     print(n, end='')
+# pattern(3)    
+
+
+# FIBONACCI SERIES:
+
+# iteratively:
+
+# fibo =[]
+
+# def fibonacci(n):
+#     for i in range(n+1):
+#         if i==0:
+#             fibo.append(0)
+#         elif i==1:
+#             fibo.append(1)
+#         else:
+#             fibo.append(fibo[-1] + fibo[-2])         
+    
+#     return fibo
+
+# print(fibonacci(10))
+
+
+#  recursively:
+
+
+# def fibonacci(n):
+#     if n==0:
+#         return 0
+#     elif n==1:
+#         return 1
+#     else:
+#         return fibonacci(n-1) + fibonacci(n-2)
+    
+# def print_fibo(n):
+#     for i in range(n+1):
+#         print(fibonacci(i), end=' ')    
+        
+    
+# print_fibo(10)    
+
+
+
+
+#  SUM OF NATURAL NUMBER USING RECURSION:
+
+# def sum_natural(current, n):
+#     if current ==n:
+#         return n
+#     return current + sum_natural(current+1, n)
+
+# print(sum_natural(0, 100))
+
+
+
+# KTH-SYMBOL PATTERN:
+
+# def generate_pattern(n):
+#     if n == 1:
+#         return "0"
+#     previous_pattern = generate_pattern(n - 1)
+#     new_pattern = ""
+#     for char in previous_pattern:
+#         if char == '0':
+#             new_pattern += "01"
+#         else:
+#             new_pattern += "10"
+    
+#     return new_pattern
+
+# # Function to print the pattern line by line
+# def print_pattern(lines):
+#     for i in range(1, lines + 1):
+#         print(generate_pattern(i))
+
+# # Example: Print the first 4 lines of the pattern
+# print_pattern(4)
+
+
+#  KTH-SYMBOL IN GRAMMAR:
+
+# def kth(n, k):
+#     if n==1:
+#         return 0
+#     previous_term =2**(n-2)
+#     if previous_term > k:
+#         return kth(n-1, k)
+#     if previous_term < k:
+#         return 1-kth(n-1, k-previous_term)
+    
+# print(4, 3)    
+
+
+
+# JOSPHUS PROBLEM:
+
+# iteratively:
+
+# def joshephus(n, k):
+#     a =0
+#     for i in range(2,n+1):
+#         a =(a+k) % i
+
+#     return a+1
+
+# print(joshephus(5, 3))   
+
+#  recursively: methhod: 1
+
+# def joshef(n, k):
+#     a =[i+1 for i in range(n)]
+#     def helper(a):
+#         if(len(a)==1):
+#             return a[0]
+#         remove_index =(k-1) %len(a)
+#         del a[remove_index]
+#         a =a[remove_index:]+a[:remove_index]
+#         return helper(a)
+#     return helper(a)
+
+# print(joshef(5, 3))
+
+#  recursively : method : 2
+
+# def josephus(n,k):
+#     def helper(n):
+#         if n==1:
+#             return 0
+#         return (helper((n-1)+k)) % k
+#     return helper(n)+1
+
+
+
+
+
+
+# TOWER OF HONOI PROBLEM:
+
+# def toh(N, fromm, to, aux):
+#     count =0
+#     def helper(N, fromm, to, aux):
+#         nonlocal count
+
+#         if N==1:
+#             print("move disk " + str(N) + " from rod " + str(fromm) + " to rod " + str(to))
+#             count +=1
+#             return
+        
+#         helper(N-1, fromm, aux, to)
+#         print("move disk " + str(N) + " from rod " + str(fromm) + " to rod " + str(to))
+#         count +=1
+
+#         helper(N-1, aux, to, fromm)
+#     helper(N, fromm, to, aux)
+
+#     return count    
+
+
+
+#  POWER SUM:
+
+# n =[1,[2,3]]
+# def power_sum(n, power =1):
+#     sum =0
+#     for i in n:
+#         if type(i)==list:
+#             sum +=power_sum(i, power+1)
+#         else:
+#             sum +=i
+
+#     return sum **power     
+        
+# print(power_sum(n))        
+
+
+# PERMUTATION OF STRING:
+
+# METHODS 1
+# str ='abc'
+# from itertools import permutations
+# a =permutations(str)
+# b =list(a)
+# print(b)
+
+#  METHOD 2:
+
+# def permutation(strs):
+#     result =[]
+#     def helper(start, end):
+#         if start == end:
+#             result.append(strs[:])
+#         for i in range(start, end):
+#             strs[start], strs[i] =strs[i], strs[start]
+#             helper(start+1, end)
+#             strs[start], strs[i] =strs[i], strs[start]
+
+#     helper(0, len(strs))  
+#     return result   
+
+
+# a=[1,2,3]
+# print(permutation(a))  
+
+
+# find all permutaion of [1,2,2]
+
+# METHODS 1
+# def perm(n):
+#     result =[]
+#     def helper(start, end):
+#         if start == end:
+#             if n[:] not in result:
+#                     result.append(n[:])
+#         for i in range(start, end):
+#              n[start], n[i] =n[i], n[start]
+#              helper(start+1, end)
+#              n[start], n[i] =n[i], n[start]
+#     helper(0, len(n))
+#     return result
+
+# n =[1,2,2]
+# print(perm(n))
+
+
+# METHODS 2
+
+# def permuteUnique(nums):
+#     def backtrack(path):
+#         if len(path) == len(nums):
+#             results.append(path[:])
+#             return
+#         for num in frequency:
+#             if frequency[num] > 0:
+#                 path.append(num)
+#                 frequency[num] -= 1
+
+#                 backtrack(path)
+
+#                 # Backtrack
+#                 path.pop()
+#                 frequency[num] += 1
+
+#     # Frequency dictionary setup
+#     frequency = {}
+#     for num in nums:
+#         if num in frequency:
+#             frequency[num] += 1
+#         else:
+#             frequency[num] = 1
+
+#     # Initialize results list
+#     results = []
+#     backtrack([])
+#     return results
+
+        
+
+#  POWER SET OF [1,2,3]
+
+#  METHOD 1
+
+# from itertools import combinations
+# my_list =[1,2,3]
+
+# power_set =[]
+# for i in range(len(my_list)+1):
+#     subsets =combinations(my_list, i)
+#     power_set.extend(subsets)
+
+# power_set =[list(subset) for subset in power_set]
+
+# print(power_set)
+
+#  METHOD 2:
+
+# def backtrack(start, path, nums, result):
+#     result.append(path.copy())  # Add the current path (subset) to result
+
+#     # Explore all elements starting from 'start'
+#     for i in range(start, len(nums)):
+#         path.append(nums[i])      # Include the current element in the subset
+#         backtrack(i + 1, path, nums, result)  # Recur for the next elements
+#         path.pop()                # Backtrack, remove the current element
+
+# def power_set(nums):
+#     result = []
+#     backtrack(0, [], nums, result)
+#     return result
+
+# nums = [1, 2, 3]
+# print(power_set(nums))
+
+
+#  FIND ALL POWER SET OF [1,2,2]
+
+# def find_power_set(nums):
+#     def backtrack(start, path):
+#         result.append(path[:])  # Append a copy of the current subset
+#         for i in range(start, len(nums)):
+#             # Skip duplicates
+#             if i > start and nums[i] == nums[i - 1]:
+#                 continue
+#             # Include nums[i] in the subset
+#             path.append(nums[i])
+#             # Move on to the next element
+#             backtrack(i + 1, path)
+#             # Exclude nums[i] from the subset
+#             path.pop()
+    
+#     nums.sort()  # Sort the array to handle duplicates
+#     result = []
+#     backtrack(0, [])
+#     return result
+
+# nums = [1, 2, 2]
+# print(find_power_set(nums))
+
+
+#  FIND ALL POSSIBLE COMBINATIONS OF K NUMBERS CHOSEN FROM [1, N]
+#  
+
+# METHODS 1
+
+# from itertools import combinations
+# a =[1,2,3,4]
+# b =combinations(a,3)
+# print(list(b))
+
+#  METHODS 2:
+
+# def combinations(n, k):
+#     result =[]
+#     def backtrack(start, path):
+#         if len(path) ==k:
+#             result.append(path[:])
+#             return
+#         for i in range(start, n+1):
+#             path.append(i)
+#             backtrack(i+1, path)
+#             path.pop()
+#     backtrack(1, [])    
+#     return result
+# print(combinations(4,2))    
+
+#  optimise above code:
+
+# def combinations(n, k):
+#     result =[]
+#     def backtrack(start, path):
+#         if len(path) ==k:
+#             result.append(path[:])
+#             return
+#         need = k-len(path)
+#         for i in range(start,n-(need-1)+1):
+#             path.append(i)
+#             backtrack(i+1, path)
+#             path.pop()
+#     backtrack(1, [])    
+#     return result
+# print(combinations(4,2)) 
+
+
+# 
+# def combinationSum(candidates, target):
+#     result = []
+
+#     def backtrack(remaining, path, start):
+#         if remaining == 0:
+#             result.append(path[:])
+#             return
+#         for i in range(start, len(candidates)):
+#             candidate = candidates[i]
+#             if candidate > remaining:
+#                 continue
+#             path.append(candidate)
+#             backtrack(remaining - candidate, path, i)  # Allow the same candidate to be used again
+#             path.pop()
+
+#     backtrack(target, [], 0)
+#     return result
+
+# candidates = [1, 2, 3, 4]
+# target = 7
+# print(combinationSum(candidates, target))
 
 
 
