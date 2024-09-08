@@ -780,7 +780,7 @@
 
 # Q 29: FIBONACCI SEQUESNCE:
 
-#  Solution 1: T=O(2^n) , S=O(n)
+#  Solution 1: T=O(2^n) , S=O(n) : RECURSIVE APPROACH
 # def fibonacci(n):
 #     if n==0:
 #         return 0
@@ -817,16 +817,17 @@
 
 # Solution 3: T=O(n) , S=O(1):
 
-def fibo(n):
-    if n>=0:
-        print(0, end=' ')
-    if n>=2:
-        print(1, end=' ')
-    a, b =0, 1
+# def fibo(n):
+#     if n>=0:
+#         print(0, end=' ')
+#     if n>=2:
+#         print(1, end=' ')
+#     a, b =0, 1
 
-    for i in range(2, n):
-        next_fib =a+b
-        print(next_fib, end=' ')
-        a,b =b,next_fib
+#     for i in range(2, n):
+#         next_fib =a+b
+#         print(next_fib, end=' ')
+#         a,b =b,next_fib
 
-fibo(10)                
+# fibo(10)   
+# 
