@@ -736,3 +736,143 @@
 
 
 
+
+
+# *********************************************************************************************************
+
+
+
+
+#  SORTED OF ARRAY-SQUARE
+
+# def sorted_square(array):
+#     a =[]
+#     for i in array:
+#         a.append(i**2)
+
+#     b = sorted(a)
+#     return b
+
+# array=[-3,-1,0,4,5]
+# print(sorted_square(array))        
+
+#  SECOND APPROACH:
+
+# def sorted_square(array):
+#     n =len(array)
+#     a =[]
+#     for i in array:
+#         a.append(abs(i))
+   
+#     b=[]    
+#     for i in sorted(a):
+#         b.append(i**2)
+#     return b
+
+# array=[-3,-1,0,4,5]
+# print(sorted_square(array))  
+
+#  THIRD APPROACH:
+
+# def sorted_square(array):
+#     j=len(array)-1
+#     i=0
+#     n=len(array)
+#     res =[0]*n
+  
+#     for k in reversed(range(n)):
+#         if array[i]**2 > array[j]**2:
+#             res[k] =array[i]**2
+#             i+=1
+#         else:
+#             res[k]=array[j]**2
+#             j -=1
+#     return res
+# array=[-3,-1,0,4,5]
+# print(sorted_square(array))
+            
+
+
+#  MONOTONIC ARRAY:
+
+
+# def monotonic_array(array):
+#     if len(array) <=1:
+#         return True
+    
+#     increasing=decreasing =True
+
+#     for i in range(1, len(array)):
+#         if array[i] > array[i-1] :
+#             decreasing=False
+#         if array[i] < array[i-1]:
+#             increasing =False    
+#     return increasing or decreasing
+
+
+
+# a=[1,2,3]
+# b=[-1,-1,2,0]
+# print(monotonic_array(b))
+
+
+
+
+#  RECURSION START:
+
+#  factorial
+
+# def fact(n):
+#     if n<=1:
+#         return 1
+#     else:
+#         return n*fact(n-1)
+# print(fact(5))    
+    
+
+#  PRINTING 43211234
+
+# def pattern(n):
+#     if n==0:
+#         return
+#     print(n, end='')
+#     pattern(n-1)
+#     print(n, end='')
+# pattern(5)       
+
+
+#  FIBONACCI PATTERN
+
+#  ITERATIVE 
+# def fibo(n):
+#     a,b= 0, 1
+#     for _ in range(n):
+#         print(a, end=' ')
+#         a, b =b,a+b
+# fibo(10)       
+
+
+#  RECURSIVE 
+
+def fibonacci_recursive(n):
+    if n <= 1:
+        return n
+    else:
+        return fibonacci_recursive(n-1) + fibonacci_recursive(n-2)
+
+# Example usage:
+n = 10  # Number of terms to print
+for i in range(n):
+    print(fibonacci_recursive(i), end=" ")
+
+
+
+    
+
+        
+
+
+
+
+
+
