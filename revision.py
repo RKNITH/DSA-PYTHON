@@ -854,25 +854,263 @@
 
 #  RECURSIVE 
 
-def fibonacci_recursive(n):
-    if n <= 1:
-        return n
-    else:
-        return fibonacci_recursive(n-1) + fibonacci_recursive(n-2)
+# def fibonacci_recursive(n):
+#     if n <= 1:
+#         return n
+#     else:
+#         return fibonacci_recursive(n-1) + fibonacci_recursive(n-2)
 
-# Example usage:
-n = 10  # Number of terms to print
-for i in range(n):
-    print(fibonacci_recursive(i), end=" ")
+# # Example usage:
+# n = 10  # Number of terms to print
+# for i in range(n):
+#     print(fibonacci_recursive(i), end=" ")
 
 
 
     
+
+#  KTH- SYMBOL IN GRAMMAR:
+
+# def kth_symbol(n, k):
+#     if n <=1:
+#         return n
+    
+#     length_of_prev_row =2**(n-2)
+#     if(k<=length_of_prev_row):
+#         return kth_symbol(n-1, k)
+#     else:
+#         return 1-kth_symbol(n-1, k-length_of_prev_row)
 
         
 
 
 
 
+#  JOSEPHOUS PROBLEM:
+
+
+#  M-1
+# def findTheWinner(n,k):
+#     a =[]
+#     for i in range(n):
+#         a.append(i+1)
+
+#     def helper(a, start_index):
+#         if(len(a)==1):
+#             return a[0]
+#         removed_index =(start_index +k-1)%len(a)
+
+#         del a[removed_index]
+
+#         return helper(a, removed_index)  
+#     return helper(a, 0)
+
+# print(findTheWinner(4,3))
+
+
+#  M-2
+
+# def find_The_Winner(n,k):
+#     a =[i+1 for i in range(n)]
+
+#     def helper(a):
+#         if len(a)==1:
+#             return a[0]
+#         removed_index =(k-1) %len(a)
+#         del a[removed_index]
+
+#         a =a[removed_index:] + a[:removed_index]
+
+#         return helper(a)
+#     return helper(a)
+
+
+# M-3:
+
+# def find_The_Winner(n,k):
+#    def helper(n):
+#       if n==1:
+#          return 0
+#       return (helper(n-1)+k)%n
+#    return helper(n)+1
+
+
+
+#  M-4:
+# def find_The_Winner(n,k):
+#     a=0
+#     for i in range(2, n+1):
+#         a =(a+k)%i
+#     return a+1    
+
+
+#  TOH:
+
+
+# def toh(N, fromm, to, aux):
+#     count =0
+#     def helper(N, fromm, to, aux):
+#         nonlocal count
+#         if N==1:
+#             print("move disk " + str(N) + " from rod " + str(fromm) + " to rod " + str(to))
+#             count +=1
+#             return
+#         helper(N-1, fromm, aux, to)
+#         print("move disk " + str(N) + " from rod " + str(fromm) + " to rod " + str(to))
+#         count +=1
+#         helper(N-1, aux, to, fromm)
+      
+#     helper(N, fromm, to, aux) 
+#     return count 
+
+
+
+
+#  POWER SUM:
+
+# def power_sum(array, power=1):
+#     sum =0
+#     for i in array:
+#         if type(i)==list:
+#             sum += power_sum(i, power+1)
+#         else:
+#             sum += i
+#     return sum **power
+
+
+
+# ALL PERMUTATION OF 'ABC'
+
+# METHODS-1
+
+# from itertools import permutations
+# a =permutations('abc')
+# b =list(a)
+# print(b)
+
+# METHOD-2
+
+# def permuation(arr):
+#     result =[]
+#     n =len(arr)
+
+#     def permuation(start, end):
+#         if start == end:
+#             result.append(arr[:])
+#         for i in range(start, end):
+#             arr[start], arr[i] =arr[i], arr[start]
+
+#             permuation(start +1, end)
+#             arr[start], arr[i] =arr[i], arr[start]
+#     permuation(0, n)
+#     return result 
+
+    
+
+# all unique permutaions of [1, 1, 2]
+
+#  METHODS-1
+
+# def permutaion(arr):
+#     result =[]
+#     n =len(arr)
+
+#     def permutaion(start, end):
+#         if arr[:] not in result:
+#             result.append(arr[:])
+#         for i in range(start, end):
+#             arr[start], arr[i] =arr[i], arr[start]
+
+#             permutaion(start +1, end)
+#             arr[start], arr[i] =arr[i], arr[start]
+#     permutaion(0, n)
+#     return result    
+#          
+
+#  M-2
+
+# def permuteUnique(nums):
+#     frequency ={}
+#     result =[]
+
+#     def backtrack(path):
+#         if len(path) == len(nums):
+#             result.append(path[:])
+#             return
+        
+#         for num in frequency:
+#             if frequency[num]>0:
+#                 path.append(num)
+#                 frequency[num] -=1
+#                 backtrack(path)
+
+#                 path.pop()
+
+#                 frequency[num] +=1
+
+#     for num in nums:
+#         if num in frequency:
+#             frequency[num] +=1
+#         else:
+#             frequency[num] =1
+
+#     backtrack([])
+#     return result   
+# 
+# 
+# 
+#                      
+
+# >>>>>>>>>>>>>>>>>>
+
+# def permutateUnique(arr):
+#     result =[]
+#     frequency ={}
+
+#     def backtrack(path):
+#         if len(path) == len(arr):
+#             result.append(path[:])
+#             return
+        
+#         for num in frequency:
+#             if frequency[num] >0:
+#                 path.append(num)
+#                 frequency[num] -=1
+
+#                 backtrack(path)
+
+#                 path.pop()
+#                 frequency[num] +=1
+#     for n in arr:
+#         if n in frequency:
+#             frequency[n] +=1
+#         else:
+#             frequency[n] =1    
+
+#     backtrack([])
+#     return result        
+
+
+
+
+
+#  FIND ALL POWERSET:
+
+# from itertools import combinations
+
+# lis =[1,2,3]
+# result =[]
+
+# for i in range(len(lis)+1):
+#     a = combinations(lis, i)
+#     result.extend(a)
+
+# result =[list(i) for i in result]
+
+# print(result)
+
+
+
+#  MEHTODS-2
 
 
