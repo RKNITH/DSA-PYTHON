@@ -1111,6 +1111,344 @@
 
 
 
-#  MEHTODS-2
+# >>>>>>>>>>>>>>>>>>>>>>>
+
+#  FIND ALL EPRMUTAIONS OF [1,2,3]
+
+# from itertools import permutations
+
+# a = permutations([1,2,3])
+# b =list(a)
+# print(b)
+
+
+#  METHOD-2
+
+# def permutaion(arr):
+#     result =[]
+#     def backtrack(start, end):
+#         if start == end:
+#             result.append(arr[:])
+#             return
+#         for i in range(start, end):
+#             arr[i], arr[start] =arr[start], arr[i]
+
+#             backtrack(start+1, end)
+#             arr[i], arr[start] =arr[start], arr[i]
+
+
+
+#     backtrack(0, len(arr))
+#     return result  
+# print(permutaion([1,2,3]))  
+
+
+
+#  find all permutaion of [1,1,2]
+
+# def permutation(arr):
+#     result =[]
+#     def backtrack(start, end):
+#         if arr[:] not in result:
+#             result.append(arr[:])
+            
+#         for i in range(start, end):
+#             arr[i], arr[start] =arr[start], arr[i]
+#             backtrack(start+1, end)
+#             arr[i], arr[start] =arr[start], arr[i]
+#     backtrack(0, len(arr))
+#     return result
+# print(permutation([1,1,2]))
+
+#  METHODS-2:
+
+
+# def permutation(arr):
+#     result =[]
+#     frequency ={}
+#     def backtrack(path):
+#         if len(path)==len(arr):
+#             result.append(path[:])
+#             return
+#         for num in frequency:
+#             if frequency[num] >0:
+#                 path.append(num)
+#                 frequency[num] -=1
+#                 backtrack(path)
+#                 path.pop()
+#                 frequency[num]+=1
+#     for n in arr:
+#         if n in frequency:
+#             frequency[n] +=1
+#         else:
+#             frequency[n] =1
+#     backtrack([])
+#     return result
+
+# print(permutation([1,1,2]))
+
+
+
+# FIND POWERSET OF [1,2,3]
+
+# from itertools import combinations
+
+# lis =[1,2,3]
+# result =[]
+
+# for i in range(len(lis)+1):
+#     a = combinations(lis, i)
+#     result.extend(a)
+
+# result =[list(i) for i in result]
+
+# print(result)
+
+
+
+#  METHODS-2:
+
+# def power_set(nums):
+#     result =[]
+#     def backtrack(start, path, nums, result):
+#         result.append(path[:])
+
+#         for i in range(start, len(nums)):
+#             path.append(nums[i])
+#             backtrack(i+1, path, nums, result)
+#             path.pop()
+
+#     backtrack(0, [], nums, result)
+#     return result        
+
+# print(power_set([1,2,3]))
+
+
+
+#  FIND POWERSET OF [1,1,2]
+
+# def subset(nums):
+#     result =[]
+#     def backtrack(start, path):
+#         result.append(path[:])
+
+#         for i in range(start, len(nums)):
+#             if i> start and nums[i] ==nums[i-1]:
+#                continue
+#             path.append(nums[i])
+#             backtrack(i+1, path)
+#             path.pop()
+    
+#     nums.sort()
+#     backtrack(0, [])
+#     return result
+# print(subset([1,1,2]))    
+
+
+
+
+#  combination of number
+
+# def combinations(n, k):
+#     result =[]
+#     def backtrack(start, path):
+#         if len(path) == k:
+#             result.append(path[:])
+#             return
+#         for i in range(start, n+1):
+#             path.append(i)
+#             backtrack(i+1,path)
+#             path.pop()
+#     backtrack(1, [])
+#     return result
+
+# print(combinations(4, 2))        
+
+
+
+#  combinations sum:
+
+# def combinations(candidates, target):
+#     result =[]
+#     def backtrack(remaining, path, start):
+#         if remaining ==0:
+#             result.append(path[:])
+#             return
+#         for i in range(start, len(candidates)):
+#             candidate =candidates[i]
+#             if candidate > remaining:
+#                 continue
+#             path.append(candidate)
+
+#             backtrack(remaining-candidate, path, i)
+#             path.pop()
+
+#     backtrack(target, [], 0)
+
+#     return result
+
+# print(combinations([2,3,8,9], 9)  )      
+        
+
+
+
+# combinations sum 2:
+
+# def combinationSum2(candidates, target):
+#     candidates.sort()
+#     result =[]
+
+#     def backtrack(remaining, path, start):
+#         if remaining == 0:
+#             result.append(path[:])
+#             return
+        
+#         for i in range(start, len(candidates)):
+#             if i > start and candidates[i] ==candidates[i-1]:
+#                 continue
+#             candi =candidates[i]
+#             if candi > remaining:
+#                 break
+#             path.append(candi)
+#             backtrack(remaining-candi, path, i+1)
+#             path.pop()
+
+#     backtrack(target, [], 0)
+#     return result
+
+# print(combinationSum2([3,5,2,1,3], 7))        
+
+
+
+#  COMBINATION SUM 3:
+# def combinationSum3(k, n):
+#     result =[]
+#     def backtrack(remaining, path, start):
+#         if len(path)==k and remaining ==0:
+#             result.append(path[:])
+#             return
+        
+#         if len(path) >k or remaining < 0:
+#             return
+#         for i in range(start, 10):
+#             path.append(i)
+#             backtrack(remaining-i, path, i+1)
+#             path.pop()
+#     backtrack(n, [], 1)
+#     return result
+
+# print(combinationSum3(3, 6))      
+# 
+# 
+# 
+
+#  
+# 
+
+#  SUDOKU SOLVER:
+
+# def solveSudoku(board):
+#     def isValid(board, row, col, num):
+
+#         # check if num in current row
+#         for i in range(9):
+#             if board[row][i] ==num:
+#                 return False
+
+#        #check if num in current column:
+#         for i in range(9):
+#             if board[i][col] ==num:
+#                 return False
+            
+#     #   check if num in the current 3* 3 sub-box:
+        
+#         boxRowStart =(row//3) * 3
+#         boxColStart =(col//3)*3
+
+#         for i in range(3):
+#             for j in range(3):
+#                 if board[boxRowStart+i][boxColStart +j] == num:
+#                     return False
+#         return True
+
+#     def solve(board):
+#         for row in range(9):
+#             for col in range(9):
+#                 if board[row][col] =='.':
+#                     for num in map(str, range(1, 10)):
+#                         if isValid(board, row, col, num):
+#                             board[row][col] =num
+#                             if solve(board):
+#                                 return True
+#                             board[row][col] ='.'
+#                     return False
+#         return True
+#     solve(board)                
+
+# # # Example usage:
+# board = [
+#     ["5", "3", ".", ".", "7", ".", ".", ".", "."],
+#     ["6", ".", ".", "1", "9", "5", ".", ".", "."],
+#     [".", "9", "8", ".", ".", ".", ".", "6", "."],
+#     ["8", ".", ".", ".", "6", ".", ".", ".", "3"],
+#     ["4", ".", ".", "8", ".", "3", ".", ".", "1"],
+#     ["7", ".", ".", ".", "2", ".", ".", ".", "6"],
+#     [".", "6", ".", ".", ".", ".", "2", "8", "."],
+#     [".", ".", ".", "4", "1", "9", ".", ".", "5"],
+#     [".", ".", ".", ".", "8", ".", ".", "7", "9"]
+# ]
+
+# solveSudoku(board)
+
+# # Print the solved board
+# for row in board:
+#     print(row)
+
+
+
+
+
+#   n-queen problem:
+
+
+# def solveNQueen(n):
+#     def isValid(board, row, col):
+
+#         # check if a queen is already placed in the same column
+#         for i in range(row):
+#             if board[i][col] =='Q':
+#                 return False
+
+#     #   check the upper left digonal:
+
+#         for i, j in zip(range(row, -1, -1), range(col, -1, -1)):
+#             if board[i][j] == 'Q':
+#                 return False
+        
+#         # check the upper-right diagonal    
+
+#         for i, j in zip(range(row, -1, -1), range(col, n)):
+#             if board[i][j] == 'Q':
+#                 return False
+
+#         return True
+
+#     def solve(board, row):
+#         if row==n:
+#             result.appedn([''.join(row) for row in board])
+#             return
+        
+#         for col in range(n):
+#             if isValid(board, row, col):
+#                 board[row][col] ='Q'
+#                 solve(board, row+1)
+#                 board[row][col] ='.'
+#     result =[]
+#     board =[['.' for _ in range(n)] for _ in range(n)]
+#     solve(board, 0)
+#     return result            
+
+
+
 
 
