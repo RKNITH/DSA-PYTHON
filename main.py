@@ -774,60 +774,145 @@
 
 
 
-# ****************** DYNAMIC PROGRAMMING START.*****************
 
 
 
-# Q 29: FIBONACCI SEQUESNCE:
 
-#  Solution 1: T=O(2^n) , S=O(n) : RECURSIVE APPROACH
-# def fibonacci(n):
+
+
+
+
+
+
+
+
+#????????????  ARRAY START->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+
+# Q  29: 
+# Given an array, rotate the array to the right by k steps, where k is non-negative.
+
+
+#  method-1:
+# def rotate_array(array, k):
+#     n =len(array)
+#     k =k%n
+
+#     return array[-k:] + array[:-k]
+
+# print(rotate_array( [1, 2, 3, 4, 5, 6, 7], 3))
+
+
+
+#  METHOD -2 : CONSTANT SPACE:
+
+# def reverse(arr, start, end):
+#     while start < end:
+#         arr[start], arr[end] = arr[end], arr[start]
+#         start += 1
+#         end -= 1
+
+# def rotate_array(arr, k):
+#     n = len(arr)
 #     if n==0:
-#         return 0
-#     if n==1:
-#         return 1
-#     return fibonacci(n-1) + fibonacci(n-2)
+#         return arr
+#     k = k % n  # Handle case when k is greater than n
+#     reverse(arr, 0, n - 1)  # Reverse the entire array
+#     reverse(arr, 0, k - 1)  # Reverse the first k elements
+#     reverse(arr, k, n - 1)  # Reverse the remaining elements
+#     return arr  # Return the modified array
 
-# def fibo(n):
-#     for i in range(n):
-#         print(fibonacci(i), end=' ')
-
-# fibo(10)
-
-# Solution 2: T=O(n) , S=O(n)
-
-# def fibonacci(n, memo):
-#     if memo[n] is not None:
-#         return memo[n]
-#     if n==0:
-#         memo[n] =0
-#     elif n==1:
-#         memo[n] =1
-#     else:
-#         memo[n] =fibonacci(n-1, memo)+fibonacci(n-2, memo)
-#     return memo[n]
-
-# def print_fibo(n):
-#     memo=[None]*n
-#     for i in range(n):
-#         print(fibonacci(i, memo), end=' ')
-
-# print_fibo(10)
+# # Example usage
+# print(rotate_array([1, 2, 3, 4, 5, 6, 7], 3))  # Output: [5, 6, 7, 1, 2, 3, 4]
 
 
-# Solution 3: T=O(n) , S=O(1):
 
-# def fibo(n):
-#     if n>=0:
-#         print(0, end=' ')
-#     if n>=2:
-#         print(1, end=' ')
-#     a, b =0, 1
 
-#     for i in range(2, n):
-#         next_fib =a+b
-#         print(next_fib, end=' ')
-#         a,b =b,next_fib
+#  Q 30:
+# Container with most water
+# Container with most Water - You are given an integer array height of length n. There are n vertical lines drawn such that the two endpoints of the ith line are (i, 0) and (i, height[i]). Find two lines that together with the x-axis form a container, such that the container contains the most water(depth is constant across containers). Return the area(that the 2 lines and the X axis make) of container which can store the max amount of water. Notice that you may not slant the container.
 
-# fibo(10)   
-# 
+
+# def max_area(height):
+#     left =0
+#     right =len(height) -1
+#     max_water =0
+#     while left < right:
+#         width =right-left
+#         current_height =min(height[left], height[right])
+#         current_area =width * current_height
+
+#         max_water =max(max_water, current_area)
+
+#         if height[left] < height[right]:
+#             left +=1
+#         else:
+#             right -=1
+#     return max_water            
+
+        
+
+#  HASH TABLE START
+
+# Q 30:
+# Coding Exercise: Two Sum
+
+# Two Sum - You are given an array of Integers and another integer targetValue. Write a function that will take these inputs and return the indices of the 2 integers in the array that add up targetValue.
+
+# def two_sum(nums, target):
+#     # Create a dictionary to store the values and their indices
+#     hash_table = {}
+    
+#     # Loop through the array
+#     for i, num in enumerate(nums):
+#         complement = target - num
+        
+#         # Check if the complement exists in the hash table
+#         if complement in hash_table:
+#             return [hash_table[complement], i]
+        
+#         # If not, store the current number with its index
+#         hash_table[num] = i
+    
+#     # If no solution is found
+#     return []
+# nums = [2, 7, 11, 15]
+# target = 9
+# print(two_sum(nums, target))  # Output: [0, 1]
+
+
+
+
+
+#  Q 31:
+
+#  Isomorphic Strings - Given two strings s and t, determine if they are isomorphic. Two strings s and t are isomorphic if the characters in s can be replaced to get t. All occurrences of a character must be replaced with another character while preserving the order of characters. No two characters may map to the same character, but a character may map to itself. s and t consist of any valid ascii character.
+
+def isomorphic_strings(s, t):
+    if len(s) != len(t):
+        return False
+    
+    # Dictionaries to store mappings of s -> t and t -> s
+    map_s_to_t = {}
+    map_t_to_s = {}
+    
+    for i in range(len(s)):
+        char_s = s[i]
+        char_t = t[i]
+        
+        # Check if there is an existing mapping from s -> t
+        if char_s in map_s_to_t:
+            if map_s_to_t[char_s] != char_t:
+                return False  # If the mapping is not consistent
+        else:
+            map_s_to_t[char_s] = char_t
+        
+        # Check if there is an existing mapping from t -> s
+        if char_t in map_t_to_s:
+            if map_t_to_s[char_t] != char_s:
+                return False  # If the mapping is not consistent
+        else:
+            map_t_to_s[char_t] = char_s
+    
+    return True
