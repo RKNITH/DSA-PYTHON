@@ -1452,3 +1452,519 @@
 
 
 
+
+
+# ******************************************************************************************************************************
+
+#  SORTED SQUARE ARRAY:
+
+# def sorted_squared(array):
+#     result =[]
+#     for i in array:
+#         result.append(i**2)
+
+#     return sorted(result)    
+
+# print(sorted_squared([1,-3,0,2,9,1]))
+
+
+
+# MONOTINIC ARRAY:
+
+# def monotonic_array(array):
+#     if len(array) <=1:
+#         return  True
+#     incrreasing =decreasing =True
+
+#     for i in range(1, len(array)):
+#         if array[i] >array[i-1]:
+#             decreasing =False
+#         if array[i] <array[i-1]:
+#             increasing =False
+#     return increasing or decreasing        
+            
+
+
+
+
+
+# # K_TH SYMBOL IN GRAMMAR:
+
+# def kth_symbol(n, k):
+#     if n==1:
+#         return 0
+#     length_of_previous_row =2**(n-2)
+#     if k< length_of_previous_row:
+#         return kth_symbol(n-1, k)
+#     else:
+#         return 1- kth_symbol(n-1, k-length_of_previous_row)
+
+
+
+#  JOSEPHUS PROBLEM:
+
+# METHOD 1
+# def findTheWinner(n,k):
+#     a =[i+1 for i in range(n)]
+
+#     def helper(a, start_index):
+#         if len(a) ==1:
+#             return a[0]
+        
+#         remove_index = (start_index + k-1) % len(a)
+#         del a[remove_index]
+#         return helper(a, remove_index)
+#     return helper(a, 0)
+
+# print(findTheWinner(4, 3))
+
+#  METHODS-2
+
+# def findTheWinner(n, k):
+#     def helper(n):
+#         if n==1:
+#             return 0
+#         return (helper(n-1)+k)%n
+#     return helper(n)+1
+
+# print(findTheWinner(4, 3))
+   
+
+
+#  METHODS-3
+
+# def findTheWinner(n,k):
+#    winner =0
+
+#    for i in range(2, n+1):
+#       winner =(winner + k) % i
+
+#    return winner +1   
+
+
+
+#  TOWER OF HONOI:
+
+
+# def toh(N, fromm, to, aux):
+#     #code below
+#     # sample print statement below
+#     #print("move disk " + 1 + " from rod " + 1 + " to rod " + 2)
+#     #in the above statement consider we are moving disk 1 from rod 1 to rod 2
+#     #remember to return number of moves as well
+    
+#     count =0
+#     def helper(N, fromm, to, aux):
+#         nonlocal count
+        
+#         if N==1:
+#             print("move disk " + str(N) + " from rod " + str(fromm) + " to rod " + str(to))
+#             count +=1
+#             return
+#         helper(N-1, fromm, aux, to)
+#         print("move disk " + str(N) + " from rod " + str(fromm) + " to rod " + str(to))
+#         count +=1
+#         helper(N-1, aux, to, fromm)
+      
+#     helper(N, fromm, to, aux) 
+#     return count 
+
+
+
+#   POWER SUM:
+
+# def power_sum(array, power=1):
+#     sum =0
+#     for i in array:
+#         if type(i)== list:
+#             sum += power_sum(i, power+1)
+#         else:
+#             sum +=i
+#     return sum ** power            
+
+
+
+
+#  find all permutaion of [1,2,3]
+
+#  METHODS -1
+
+# from itertools import permutations
+# a =[1,2,3]
+# b =list(permutations(a))
+# print(b)
+
+
+#  METHODS-2
+
+# def permute(nums):
+#     result =[]
+#     def backtrack(start, end):
+#         if start == end:
+#             result.append(nums[:])
+#         for i in range(start, end):
+#             nums[start], nums[i] =nums[i], nums[start] 
+#             backtrack(start+1, end)
+#             nums[start], nums[i] =nums[i], nums[start] 
+#     backtrack(0, len(nums))
+#     return result
+
+# print(permute([1,2,3]))        
+              
+
+
+#  FIND ALL PERMUTATION OF [1,1,2]
+
+#  METHODS-1
+
+# def permuteUnique(nums):
+#     result =[]
+#     def backtrack(start, end):
+#         if start == end:
+#             if nums[:] not in result:
+#                 result.append(nums[:])
+
+#         for i in range(start, end):
+#             nums[start], nums[i] =nums[i], nums[start] 
+#             backtrack(start+1, end)
+#             nums[start], nums[i] =nums[i], nums[start] 
+#     backtrack(0, len(nums))
+#     return result  
+
+# print(permuteUnique([1,2,2]))      
+
+
+#  METHODS-2
+
+# def perutateUnique(nums):
+#     result =[]
+#     frequency ={}
+#     def backtrack(path):
+#         if len(path)== len(nums):
+#             result.append(path[:])
+#             return
+#         for num in frequency:
+#             if frequency[num] >0:
+#                 path.append(num)
+#                 frequency[num] -=1
+
+#                 backtrack(path)
+
+#                 path.pop()
+#                 frequency[num] +=1
+#     for  num in nums:
+#         if num in frequency:
+#             frequency[num] +=1
+#         else:
+#             frequency[num] =1
+#     backtrack([])
+#     return result
+
+# print(perutateUnique([1,1,2,2,2]))            
+
+
+
+
+
+#  FIND ALL SUBSET OF [1,2,3]
+
+# from itertools import combinations
+# a =[1,2,3]
+# lis =[1,2,3]
+# power_set =[]
+# for r in range(len(lis)+1):
+#     subsets =combinations(lis, r)
+#     power_set.extend(subsets)
+
+# power_set =[list(subset) for subset in power_set]
+# print(power_set)
+
+
+#  METHODS-2:
+
+# def backtrack(start, path, nums, result):
+#     result.append(path[:])
+#     for i in range(start, len(nums)):
+#         path.append(nums[i])
+#         backtrack(i+1, path, nums, result)
+
+#         path.pop()
+# def power_set(nums):
+#     result =[]
+#     backtrack(0, [], nums, result)
+#     return result
+
+# nums =[1,2,3]
+# print(power_set(nums))        
+
+
+
+
+#  find all sunset of [1,1,2]
+
+# def subsetWithDup(nums):
+#     nums.sort()
+#     result =[]
+
+#     def backtrack(start, path):
+#         result.append(path[:])
+#         for i in range(start, len(nums)):
+#             if i > start and nums[i] == nums[i-1]:
+#                 continue
+#             path.append(nums[i])
+#             backtrack(i+1, path)
+#             path.pop()
+#     backtrack(0, path=[])
+#     return result
+
+# print(subsetWithDup([1,1,2]))        
+
+
+
+#  find all combination of [1,2,3]
+
+#  methods-1
+
+# from itertools import combinations
+
+# a=[1,2,3,4]
+# b =combinations(a, 2)
+# print(list(b))
+
+
+#  methods-2
+
+# def combination(n,k):
+#     result =[]
+#     def backtrack(start, path):
+#         if(len(path)==k):
+#             result.append(path[:])
+#             return
+#         for i in range(start, n+1):
+#             path.append(i)
+#             backtrack(i+1, path)
+#             path.pop()
+#     backtrack(1, [])
+#     return result
+# print(combination(4,2))        
+
+#  COMBINATION SUM 1:
+
+# def combinationSum(candidates, target):
+#     result =[]
+#     def backtrack(remaining, path, start):
+#         if remaining  ==0:
+#             result.append(path[:])
+#             return 
+#         for i in range(start, len(candidates)):
+#             candidate =candidates[i]
+
+#             if candidate > remaining:
+#                 continue
+#             path.append(candidate)
+#             backtrack(remaining-candidate, path, i )
+#             path.pop()
+#     backtrack(target, [], 0)
+#     return result
+# print(combinationSum([1,2,3,4,5,6], 10))        
+
+
+#  COMBINATION SUM 2:
+
+# def combinatioSum2(candidate, target):
+#     candidate.sort()
+#     result =[]
+#     def backtrack(remaining, path, start):
+#         if remaining ==0:
+#             result.append(path[:])
+#             return
+#         for i in range(start, len(candidate)):
+#             if i > start and candidate[i] ==candidate[i-1]:
+#                 continue
+#             candidat =candidate[i]
+
+#             if candidat > remaining:
+#                 break
+#             path.append(candidat)
+#             backtrack(remaining-candidat, path, i+1)
+#             path.pop()
+#     backtrack(target, [], 0)
+#     return result
+
+# print(combinatioSum2([1,2,3,4,5,6], 10))        
+        
+
+
+#  combination sum 3:
+
+# def combiantionSum3(k, n):
+#     result =[]
+#     def backtrack(start, path, remaining):
+#         if(len(path)==k) and remaining ==0:
+#             result.append(path[:])
+#             return
+#         if len(path) > k or remaining <0:
+#             return
+        
+#         for i in range(start, 10):
+#             path.append(i)
+#             backtrack(i+1, path, remaining-i)
+#             path.pop()
+
+#     backtrack(1, [], n)
+#     return result        
+
+
+
+
+
+#  SUDOKU SOLVER:
+
+# def solveSudoku(board):
+#     def isValid(board, row, col, num):
+#         for i in range(9):
+#             if board[row][i] == num:
+#                 return False
+
+#         for i in range(9):
+#             if board[i][col] ==num:
+#                 return False
+
+#         boxRowStart =(row // 3) * 3
+#         boxColStart =(col//3)*3
+
+
+#         for i in range(3):
+#             for j in range(3):
+#                 if board[boxRowStart+i][boxColStart +j] == num:
+#                     return False
+#         return True
+
+#     def solve(board):
+#         for row in range(9):
+#             for col in range(9):
+#                 if board[row][col] =='.':
+#                     for num in map(str, range(1, 10)):
+#                         if isValid(board, row,col, num):
+#                             board[row][col] =num
+#                             if solve(board):
+#                                 return True
+#                             board[row][col] ='.'
+#                     return False
+#         return True
+#     solve(board)                        
+
+
+#  N-QUEEN:
+
+# def solveNQueen(n):
+#     result =[]
+#     def isValid(board, row, col):
+#         for i in range(row):
+#             if board[i][col] =='Q':
+#                 return False
+
+#         for i, j in zip(range(row, -1, -1), range(col, -1, -1)):
+#             if board[i][j] =='Q':
+#                 return False
+#         for i, j in zip(range(row, -1, -1), range(col, n)):
+#             if board[i][j] =='Q':
+#                 return False
+#         return True
+#     def solve(board, row):
+#         if row ==n:
+#             result.append([''.join(row) for row in board])
+#             return
+
+#         for col in range(n):
+#             if isValid(board, row, col):
+#                 board[row][col] ='Q'
+#                 solve(board, row+1)
+#                 board[row][col] ='.'
+#     board =[['.' for _ in range(n)] for _ in range(n)]
+#     solve(board, 0)
+#     return result
+                
+
+#  ARRAY ROTATION:
+# 
+
+# def reverse(arr, start, end):
+#     while start < end:
+#         arr[start], arr[end] =arr[end], arr[start]
+#         start +=1
+#         end -=1
+
+# def rotate_array(array, k):
+#     n =len(array)
+#     if n ==0:
+#         return array
+    
+#     k = k % n
+#     reverse(array, 0, n-1)
+#     reverse(array, 0, k-1)
+#     reverse(array, k, n-1)
+#     return array
+
+
+#  MAXIMUM WATER IN CONTAINER:
+
+# def max_area(height):
+#     left =0
+#     right =len(height)
+
+#     max_water =0
+#     while left < right:
+#         width =right-left
+#         current_height =min(height[left], height[right])
+#         current_arer =width* current_height
+
+#         max_water =max(max_water, current_arer)
+
+#         if height[left] < height[right]:
+#             left +=1
+#         else:
+#             right -=1
+#     return max_water
+            
+
+
+#  TWO SUM:
+
+# def tow_sum(array, target):
+#     hash_table ={}
+
+#     for i, num in enumerate(array):
+#         complement =target -num
+
+#         if complement in hash_table:
+#             return [hash_table[complement], i]
+#         hash_table[num] =i
+#     return []    
+
+
+#  ISOMORPHIC SRING:
+
+def isomorphic_string(s,t):
+    if len(s) != len(t):
+        return False
+    
+    map_s_to_t ={}
+    map_t_to_s ={}
+
+    for i in range(len(s)):
+        char_s =s[i]
+        char_t =t[i]
+
+        if char_s in map_s_to_t:
+            if map_s_to_t[char_s] != char_t:
+                return False
+        else:
+            map_s_to_t[char_s] =char_t
+
+        if char_t in map_t_to_s:
+            if map_t_to_s[char_t] !=char_s:
+                return False
+        else:
+            return True
+                    
