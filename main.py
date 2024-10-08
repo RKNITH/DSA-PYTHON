@@ -1813,43 +1813,352 @@ def threeSum(nums):
 
 #  METHODS---1............... ITERATIVE APPROACH
 
-def search_for_range(array,target):
+# def search_for_range(array,target):
 
-    #  HELPER TO FIND FIRST OCCURANCE
-    def find_first_position(array, target):
-        left, right=0, len(array)-1
-        first_pos =-1
+#     #  HELPER TO FIND FIRST OCCURANCE
+#     def find_first_position(array, target):
+#         left, right=0, len(array)-1
+#         first_pos =-1
 
-        while left <=right:
-            mid =(left+right) //2
+#         while left <=right:
+#             mid =(left+right) //2
 
-            if array[mid] == target:
-                first_pos =mid
-                right =mid-1
-            elif array[mid] < target:
-                left =mid+1
+#             if array[mid] == target:
+#                 first_pos =mid
+#                 right =mid-1
+#             elif array[mid] < target:
+#                 left =mid+1
+#             else:
+#                 right =mid-1
+#         return first_pos     
+
+
+#             #    HELPER TO FIND LAST OCCURANCE
+
+#     def find_last_occurance(array, target):
+#         left, right =0, len(array)-1
+#         last_pos =-1
+#         while left<=right:
+#             mid =(left+right)//2
+#             if array[mid] ==target:
+#                 last_pos =mid
+#                 left =mid+1
+#             elif array[mid] <target:
+#                 left =mid+1
+#             else:
+#                 right =mid-1
+#         return last_pos
+
+#     first_pos =find_first_position(array, target)
+#     last_pos =find_last_occurance(array, target)    
+
+#     return [first_pos, last_pos]                    
+
+
+
+# #  METHODS -2    RECURSIVE 
+
+# def search_for_range_recursive(array, target):
+#     # Recursive helper function to find the first position
+#     def find_first_position(left, right):
+#         if left > right:
+#             return -1
+#         mid = (left + right) // 2
+#         if array[mid] == target:
+#             # If mid is the target and it's either the first element or the previous element is not the target
+#             if mid == 0 or array[mid - 1] != target:
+#                 return mid
+#             else:
+#                 return find_first_position(left, mid - 1)
+#         elif array[mid] < target:
+#             return find_first_position(mid + 1, right)
+#         else:
+#             return find_first_position(left, mid - 1)
+
+#     # Recursive helper function to find the last position
+#     def find_last_position(left, right):
+#         if left > right:
+#             return -1
+#         mid = (left + right) // 2
+#         if array[mid] == target:
+#             # If mid is the target and it's either the last element or the next element is not the target
+#             if mid == len(array) - 1 or array[mid + 1] != target:
+#                 return mid
+#             else:
+#                 return find_last_position(mid + 1, right)
+#         elif array[mid] < target:
+#             return find_last_position(mid + 1, right)
+#         else:
+#             return find_last_position(left, mid - 1)
+
+#     # Find the first and last positions
+#     first_pos = find_first_position(0, len(array) - 1)
+#     last_pos = find_last_position(0, len(array) - 1)
+
+#     return [first_pos, last_pos]
+
+# # Example Usage
+# array = [5, 7, 7, 8, 8, 10]
+# target = 8
+# print(search_for_range_recursive(array, target))  # Output: [3, 4]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#  Q 48>>>>>>>>>>>>>>>>>>>>>>>
+
+
+# Search in Matrix
+# Question:
+# 
+# Search in 2D Array-Write an efficient algorithm that searches for a value target in an m x n integer matrix. This matrix has the following properties:
+# 
+# Integers in each row are sorted from left to right.
+# 
+# The first integer of each row is greater than the last integer of the previous row.
+# 
+# If the value is there in the matrix return true, else false.
+# 
+# 
+# 
+# Try :
+# 
+# Try to write the solution with T=O(mn) where m and n are the number of rows and number of columns respectively
+
+
+
+
+
+#  SOLUTION >>>>>
+
+
+def search_in_matrix(matrix,target):
+    if not matrix or not matrix[0]:
+        return False
+    
+    rows, cols =len(matrix), len(matrix[0])
+
+    left =0
+    right =rows*cols -1
+
+    while left <= right:
+        mid =(left + right)//2
+
+        row =mid//cols
+        col =mid % cols
+
+        if matrix[row][col] == target:
+            return True
+        elif matrix[row][col] < targte:
+            left =mid+1
+        else:
+            right =mid-1
+    return False            
+
+
+
+
+
+
+# >>>>>>>>>>>>>>>>>>>>  BUBBLE SORT
+#  Q 49
+
+# Bubble Sort Algorithm
+
+# Bubble Sort - You are given an array of integers. Write a function that will take this array as input and return the sorted array using Bubble sort.
+
+#  SOLUTION
+def bubble_sort(array):
+    n =len(array)
+    for i in range(n-1):
+        for j in range(n-i-1):
+            if array[j] > array[j+1]:
+                array[j], array[j+1] =array[j+1], array[j]
+    return array            
+
+
+
+
+
+
+#  Q 50:         .. INSERTION SORT.........
+
+# Insertion Sort Algorithm
+# 
+# Insertion Sort -You are given an array of integers. Write a function that will take this array as input and return the sorted array using Insertion sort.
+
+
+def insertion_sort(array):
+    n =len(array)
+    for i in range(1, n):
+        insert_index =i
+        current_value =array[i]
+
+        for j in range(i-1, -1, -1):
+            if array[j] > current_value:
+                insert_index =j
+
+        array.insert(insert_index, current_value)
+    return array            
+
+
+
+
+
+
+
+# Q 51 >>>>>>>>>>>>>>>>
+
+# Selection Sort Algorithm
+# 
+# Selection Sort-You are given an array of integers. Write a function that will take this array as input and return the sorted array using Selection sort.
+# 
+
+
+def selection_sort(nums):
+    n =len(nums)
+    for i in range(n-1):
+        min_index =i
+        for j in range(i+1, n):
+            if nums[j] < nums[min_index]:
+                min_index =j
+        min_value =nums.pop(min_index)
+        nums.insert(i, min_index)
+    return nums
+
+
+
+#    Q 52:  MERGE SORT....
+# 
+def merge_sort(array):
+    n =len(array)
+    if n<=1:
+        return array
+    mid =n//2
+    left_half =array[:mid]
+    right_half =array[mid:]
+
+    sorted_left =merge_sort(left_half)
+    sorted_right =merge_sort(right_half)
+
+    def merge(left, right):
+        result =[]
+        i=j=0
+        while i<len(left) and j<len(right):
+            if left[i] < right[j]:
+                result.append(left[i])
+                i +=1
             else:
-                right =mid-1
-        return first_pos     
+                result.append(right[j])
+                j +=1
+        result.extend(left[i:])
+        result.extend(right[j:])
+        return result            
+
+    return merge(sorted_left, sorted_right)
 
 
-            #    HELPER TO FIND LAST OCCURANCE
 
-    def find_last_occurance(array, target):
-        left, right =0, len(array)-1
-        last_pos =-1
-        while left<=right:
-            mid =(left+right)//2
-            if array[mid] ==target:
-                last_pos =mid
-                left =mid+1
-            elif array[mid] <target:
-                left =mid+1
-            else:
-                right =mid-1
-        return last_pos
 
-    first_pos =find_first_position(array, target)
-    last_pos =find_last_occurance(array, target)    
+# Q 53 >>>>>>>>>
+# 
+#  QUICK SORT\
 
-    return [first_pos, last_pos]                    
+# Quick Sort-You are given an array of integers. Write a function that will take this array as input and return the sorted array using Quick sort.
+
+
+def swap(array, i, j):
+    # Swap the elements at index i and j in the array
+    array[i], array[j] = array[j], array[i]
+
+def partition(array, start=0, end=None):
+    if end is None:
+        end = len(array) - 1
+
+    # Choose the last element as the pivot
+    pivot = array[end]
+    # Initialize the partition index to start
+    partition_index = start
+
+    for i in range(start, end):
+        # If the current element is less than or equal to the pivot
+        if array[i] <= pivot:
+            # Swap it with the element at partition index
+            swap(array, i, partition_index)
+            # Move the partition index one step to the right
+            partition_index += 1
+
+    # Swap the pivot element with the element at the partition index
+    swap(array, partition_index, end)
+
+    return partition_index
+
+def quick_sort(array, start=0, end=None):
+    if end is None:
+        end = len(array) - 1
+
+    if start < end:
+        # Partition the array and get the pivot index
+        pivot_index = partition(array, start, end)
+        # Recursively sort the elements before and after partition
+        quick_sort(array, start, pivot_index - 1)
+        quick_sort(array, pivot_index + 1, end)
+
+    return array
+
+
+
+
+
+# SECOND APPROACH:    TC: O(NLOG(N))   SC : LOG(N)
+
+
+def swap(array, i, j):
+    # Swap elements at indices i and j in the array
+    array[i], array[j] = array[j], array[i]
+
+def partition(array, start=0, end=None):
+    if end is None:
+        end = len(array) - 1
+
+    # Choose the last element as the pivot
+    pivot = array[end]
+    partition_index = start
+
+    # Rearrange elements based on pivot
+    for i in range(start, end):
+        if array[i] <= pivot:
+            swap(array, i, partition_index)
+            partition_index += 1
+
+    # Swap pivot to its correct position
+    swap(array, partition_index, end)
+    return partition_index
+
+def quick_sort(array, start=0, end=None):
+    if end is None:
+        end = len(array) - 1
+
+    while start < end:
+        # Partition the array and get pivot index
+        pivot_index = partition(array, start, end)
+
+        # Recursively sort the smaller subarray first to reduce recursion depth
+        if pivot_index - start < end - pivot_index:
+            quick_sort(array, start, pivot_index - 1)
+            start = pivot_index + 1  # Tail call optimization for right part
+        else:
+            quick_sort(array, pivot_index + 1, end)
+            end = pivot_index - 1  # Tail call optimization for left part
+
+    return array
