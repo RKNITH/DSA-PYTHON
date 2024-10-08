@@ -2162,3 +2162,68 @@ def quick_sort(array, start=0, end=None):
             end = pivot_index - 1  # Tail call optimization for left part
 
     return array
+
+
+
+
+
+#  Q 54............... REDIX SORT................
+
+# Radix Sort Algorithm
+# 
+# Radix Sort-You are given an array of non-negative integers. Write a function that will take this array as input and return the sorted array using Radix sort.
+
+
+def counting_sort(array, place):
+    # Find the maximum digit value (0-9) for base 10 numbers
+    max_digit = 9  
+    size = len(array)
+    
+    # Create an output array to store sorted values
+    output = [0] * size
+    # Initialize count array with zero values (10 for each digit)
+    count = [0] * (max_digit + 1)
+
+    # Calculate the frequency of each digit at the given place value
+    for i in range(size):
+        index = (array[i] // place) % 10
+        count[index] += 1
+
+    # Compute the cumulative count
+    for i in range(1, max_digit + 1):
+        count[i] += count[i - 1]
+
+    # Place elements in the output array based on the cumulative count
+    i = size - 1
+    while i >= 0:
+        index = (array[i] // place) % 10
+        output[count[index] - 1] = array[i]
+        count[index] -= 1
+        i -= 1
+
+    # Copy the sorted elements back into the original array
+    for i in range(size):
+        array[i] = output[i]
+
+def radix_sort(array):
+    # Check if the input array is empty
+    if len(array) == 0:
+        return array
+    
+    # Find the maximum number to determine the number of digits
+    max_num = max(array)
+    
+    # Initialize place value (1s, 10s, 100s, etc.)
+    place = 1
+    
+    # Apply counting sort for each digit place value
+    while max_num // place > 0:
+        counting_sort(array, place)
+        place *= 10
+    
+    return array
+
+# Example usage:
+array = [170, 45, 75, 90, 802, 24, 2, 66]
+sorted_array = radix_sort(array)
+print("Sorted array:", sorted_array)
