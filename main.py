@@ -889,30 +889,967 @@
 
 #  Isomorphic Strings - Given two strings s and t, determine if they are isomorphic. Two strings s and t are isomorphic if the characters in s can be replaced to get t. All occurrences of a character must be replaced with another character while preserving the order of characters. No two characters may map to the same character, but a character may map to itself. s and t consist of any valid ascii character.
 
-def isomorphic_strings(s, t):
-    if len(s) != len(t):
-        return False
+# def isomorphic_strings(s, t):
+#     if len(s) != len(t):
+#         return False
     
-    # Dictionaries to store mappings of s -> t and t -> s
-    map_s_to_t = {}
-    map_t_to_s = {}
+#     # Dictionaries to store mappings of s -> t and t -> s
+#     map_s_to_t = {}
+#     map_t_to_s = {}
     
-    for i in range(len(s)):
-        char_s = s[i]
-        char_t = t[i]
+#     for i in range(len(s)):
+#         char_s = s[i]
+#         char_t = t[i]
         
-        # Check if there is an existing mapping from s -> t
-        if char_s in map_s_to_t:
-            if map_s_to_t[char_s] != char_t:
-                return False  # If the mapping is not consistent
-        else:
-            map_s_to_t[char_s] = char_t
+#         # Check if there is an existing mapping from s -> t
+#         if char_s in map_s_to_t:
+#             if map_s_to_t[char_s] != char_t:
+#                 return False  # If the mapping is not consistent
+#         else:
+#             map_s_to_t[char_s] = char_t
         
-        # Check if there is an existing mapping from t -> s
-        if char_t in map_t_to_s:
-            if map_t_to_s[char_t] != char_s:
-                return False  # If the mapping is not consistent
-        else:
-            map_t_to_s[char_t] = char_s
+#         # Check if there is an existing mapping from t -> s
+#         if char_t in map_t_to_s:
+#             if map_t_to_s[char_t] != char_s:
+#                 return False  # If the mapping is not consistent
+#         else:
+#             map_t_to_s[char_t] = char_s
     
-    return True
+#     return True
+
+
+
+
+
+
+
+
+
+#  Q 32>
+
+# Best Time to Buy and Sell Stock
+# You are given an array prices where prices[i] is the price of a given stock on the ith day.
+
+# You want to maximize your profit by choosing a single day to buy one stock and choosing a different day in the future to sell that stock.
+
+# Return the maximum profit you can achieve from this transaction. If you cannot achieve any profit, return 0.
+
+
+
+# Example:
+
+# Input: prices = [9,1,5,3,7,5]
+
+# Output: 6
+
+
+#  SOLUTION>>>>>>>>>>>>
+
+
+# def maxProfit(prices):
+#     left =0
+#     max_profit =0
+
+#     for right in range(1, len(prices)):
+#         if prices[right] < prices[left]:
+#             left =right
+#         else:
+#             profit =max(max_profit, prices[right]-prices[left])    
+
+#     return max_profit
+
+
+
+
+
+
+#  Q 33>
+
+# Two Sum II
+# 
+# Given a 1-indexed array of integer numbers that is already sorted in non-decreasing order, find two numbers such that they add up to a specific target number.
+# 
+# Return the indices of the two numbers, index1 and index2, array [index1, index2] of length 2.
+# 
+# It is guaranteed that there is exactly one solution. You may not use the same element twice.
+# 
+# Your solution must use only constant extra space.
+# 
+# 
+# 
+# Example: Input: numbers = [1,3,4], target = 5; Output: [1,3]
+
+
+#  SOLUTION >>>>>>>>>>>>>>>
+
+# def twoSum(numbers, target):
+#     # Initialize the two pointers
+#     start = 0
+#     end = len(numbers) - 1
+
+#     # Iterate until the two pointers meet
+#     while start < end:
+#         # Calculate the sum of the elements at start and end
+#         current_sum = numbers[start] + numbers[end]
+        
+#         # If the sum is greater than the target, move the end pointer left
+#         if current_sum > target:
+#             end -= 1
+#         # If the sum is less than the target, move the start pointer right
+#         elif current_sum < target:
+#             start += 1
+#         # If the sum is equal to the target, return the 1-indexed positions
+#         else:
+#             return [start + 1, end + 1]
+
+
+
+
+
+# 
+
+
+#  Q 34 >
+
+
+# 3 Sum
+# 
+# Given an integer array nums, return all the triplets [nums[i], nums[j], nums[k]]
+# 
+# such that i != j, i != k, and j != k, and nums[i] + nums[j] + nums[k] == 0.
+# 
+# Notice that the solution set must not contain duplicate triplets.
+# 
+# Example:
+# 
+# Input: nums = [-2,0,2,1,-1,-3]
+# 
+# Output: [[-2,0,2],[0,1,-1],[2,1,-3]]
+# 
+# 
+# 
+# Input: nums = [-1,2,6,-1,1]
+# 
+# Output: [[-1,2,-1]]
+# 
+
+
+#  SOLUTION >
+
+def threeSum(nums):
+    # Sort the input array
+    nums.sort()
+    # Initialize an empty list to store the results
+    result = []
+    
+    # Iterate through each element in the array (excluding the last two for triplet)
+    for i in range(len(nums) - 2):
+        # Skip duplicate elements to avoid duplicate triplets
+        if i > 0 and nums[i] == nums[i - 1]:
+            continue
+
+        # Set the two pointers
+        left, right = i + 1, len(nums) - 1
+        
+        # Use the two-pointer technique to find valid triplets
+        while left < right:
+            current_sum = nums[i] + nums[left] + nums[right]
+            
+            if current_sum == 0:
+                # Found a valid triplet
+                result.append([nums[i], nums[left], nums[right]])
+                
+                # Move the left pointer and skip duplicates
+                left += 1
+                while left < right and nums[left] == nums[left - 1]:
+                    left += 1
+                
+                # Move the right pointer and skip duplicates
+                right -= 1
+                while left < right and nums[right] == nums[right + 1]:
+                    right -= 1
+            
+            # If the current sum is less than zero, move the left pointer to the right
+            elif current_sum < 0:
+                left += 1
+            
+            # If the current sum is greater than zero, move the right pointer to the left
+            else:
+                right -= 1
+    
+    return result
+
+
+
+
+
+
+
+
+# Q 35>
+# 
+
+# Max Avg Subarray I
+# You are given an integer array nums consisting of n elements, and an integer k.
+# 
+# Find a contiguous subarray whose length is equal to k that has the maximum average value and return this value. Any answer with a calculation error less than 10^-5 will be accepted.
+# 
+# 
+# 
+# Example:
+# 
+# Input: [1,13,-6,-3,40,2], k = 4
+# 
+# Output: 11
+# 
+# 13 + -6 + -3 + 40 = 44; 44/4 = 11
+
+
+
+#  SOLUTION:
+
+# def findMaxAverage(nums, k):
+#     current_sum =sum(nums[:k])
+#     max_sum=current_sum
+
+#     for i in range(k, len(nums)):
+#         current_sum = current_sum + nums[i] -nums[i-k]
+#         max_sum =max(max_sum, current_sum)
+#     return max_sum /k    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#  Q 36 > 
+
+# Repeated DNA Sequence
+# Repeated DNA Sequence: 
+# 
+# The DNA sequence is composed of a series of nucleotides abbreviated as 'A', 'C', 'G', and 'T'.
+# 
+# •For example, "ACGAATTCCG" is a DNA sequence.
+# 
+# When studying DNA, it is useful to identify repeated sequences within the DNA.
+# 
+# Given a string s that represents a DNA sequence, return all the 10-letter-long sequences (substrings) that occur more than once in a DNA molecule. You may return the answer in any order.
+# 
+# Example:
+# 
+# Input: s = ”GAAAATCCCCGAAAATCCCCGAAAAAGGGTTT"
+# 
+# Output: [”GAAAACCCCC",”TCCCCGAAAA"]
+
+
+
+
+#  SOLUTION>>>>>>>>>> METHOD-1
+
+# def findRepeatedDnaSequences(s):
+#     L=10
+#     n=len(s)
+
+#     seen, output =set(), set()
+
+#     for start in range(n-L+1):
+#         temp=s[start:start+L]
+#         if temp in seen:
+#             output.add(temp[:])
+
+#         seen.add(temp)
+
+#     return list(output)        
+
+
+
+#  SOLUTION:   METHOD-2 
+
+# def findRepeatedDnaSequence(s):
+#     L=10
+#     n=len(s)
+#     if n <=L :return []
+
+#     to_int ={'A':0, 'C':1, 'G':2, 'T':3}
+
+#     nums =[to_int.get(s[i]) for i in range(n)]
+
+#     a =4
+#     aL=pow(a, L)
+
+#     h=0
+#     seen=set()
+#     output =set()
+
+#     for start in range(n-L+1):
+#         if start !=0:
+#             h =h*a -nums[start-1]*aL + nums[start+L-1]
+
+#         else:
+#             for i in range(L):
+#                 h =h*a+ nums[i]
+        
+#         if h in seen:
+#             output.add(s[start:start+L])
+
+#         seen.add(h)  
+
+#     return list(output)
+
+
+
+
+
+
+
+
+
+
+
+
+# Q 37>>>>>>>>>>>>>>>>>>>
+
+# Sliding Window Maximum
+# Sliding Window Maximum
+# 
+# You are given an array of integers nums, there is a sliding window of size k which is moving from the very left of the array to the very right. You can only see the k numbers in the window. Each time the sliding window moves right by one position.
+# 
+# Return the max sliding window.
+# 
+# 
+# Example:
+# 
+# Input: nums = [2,3,-2,-4,5,2,8,11], k = 3
+# 
+# Output: [3,3,5,5,8,11]
+
+
+#  SOLUTION>>>
+
+# from collections import deque
+# def maxSlidingWindow(nums, k):
+#     dq =deque()
+#     output =[]
+
+#     for i in range(k):
+#         while dq and nums[i] >= nums[dq[-1]]:
+#             dq.pop()
+
+#         dq.append(i)
+
+#     output.append(nums[dq[0]])
+
+#     for i in range(k, len(nums)):
+#         if dq and dq[0] == i-k:
+#             dq.popleft()
+
+#         while dq and nums[i]>= nums[dq[-1]]:
+#             dq.pop()
+
+#         dq.append(i)  
+#         output.append(nums[dq[0]])
+
+#     return output          
+
+
+
+
+
+# 38>>>>>>>>>>>>>>>>>
+
+
+# Minimum Window Substring
+# Minimum Window Substring: 
+# 
+# Given two strings s and t of lengths m and n respectively, return the minimum window
+# 
+# substring
+# 
+# ofssuch that every character int(including duplicates) is included in the window. If there is no such substring, returnthe empty string"".
+# 
+# 
+# 
+# The testcases will be generated such that the answer is unique.
+# 
+# 
+
+
+#   SOLUTION>>>>>>>>>>>>>>>>>>>>
+
+
+# def minWindow(s, t):
+#     if t =='': return ''
+
+#     count_t ={}
+#     slide_window ={}
+
+#     for c in t:
+#         count_t[c] =1 + count_t.get(c, 0)
+
+#     need =len(count_t)
+
+#     have =0
+
+#     res =[-1,-1]
+
+#     res_length =float('infinity')
+
+#     left =0
+#     for right in range(len(s)):
+#         c =s[right]
+#         slide_window[c] =1+ slide_window.get(c, 0)
+
+#         if c in count_t and slide_window[c] == count_t[c]:
+
+#             have +=1
+#         while have == need:
+#             if right-left +1 < res_length:
+#                 res =[left, right]
+#                 res_length =right-left+1
+
+#             slide_window[s[left]] -=1
+#             if s[left] in count_t and slide_window[s[left]] < count_t[s[left]]:
+#                 have -=1
+
+#             left +=1
+#     left, right =res        
+
+#     return s[left:right+1] if res_length != float('infinity') else ''
+
+
+
+
+
+
+# ******* Q 39>>>>>>>>>>>>>
+
+# Min Size Subarray Sum
+# Minimum Size Subarray Sum: 
+# 
+# Given an array of positive integers nums and a positive integer target, return the minimal length of a subarray whose sum is greater than or equal to target. If there is no such subarray, return 0 instead.
+# 
+# Example:
+# 
+# target = 15
+# 
+# nums = [5, 1, 3, 5, 10, 7, 4, 9, 2, 8]
+# 
+# expected = 2
+# 
+
+
+
+#  ********** SOLUTION >>>>>>>>>>>>>>>>
+
+
+# def minSubArrayLen(target, nums):
+#     left =0
+#     currentSum =0
+#     length =float('infinity')
+
+#     for right in range(len(nums)):
+#         currentSum += nums[right]
+
+#         while currentSum >=target:
+#             newLength  =right-left+1
+#             if newLength < length:
+#                 length =newLength
+
+#             currentSum -= nums[left]    
+#             left +=1
+            
+#     return length if length !=float('infinity') else 0
+
+
+
+
+
+
+
+
+
+#  Q 40:>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+# Frequency of the Most Frequent Element
+# The frequency of an element is the number of times it occurs in an array.
+# 
+# You are given an integer array nums and an integer k. In one operation, you can choose an index of nums and increment the element at that index by 1.
+# 
+# Return the maximum possible frequency of an element after performing at most k operations.
+# 
+# Example:
+# 
+# Input: nums = [2,3,5], k = 5
+# 
+# Output: 3
+
+# def maxFrequency(nums, k):
+#     nums.sort()
+
+#     left =0
+#     total =0
+#     res =0
+
+#     for right in range(len(nums)):
+#         total += nums[right]
+#         while  nums[right]*(right-left+1) > total +k:
+#             total -= nums[left]
+#             left +=1
+#         res =max(res, right-left+1)   
+#     return res    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# ################    STRING ###############################
+
+
+#  Q 41:
+
+# First Non Repeating Character
+# Question:
+# 
+# Non repeating character - You are given a string consisting of only lower case and upper-case English Alphabets and integers 0 to 9. Write a function that will take this string as Input and return the index of the first character that is non-repeating.
+# 
+# 
+# 
+# Try to optimise your solution:
+# 
+# Brute Force method : 
+# T=O(n^2), S=O(1)
+# 
+# 
+# 
+# Optimal Solution:
+# T=O(n), S=O(1)
+
+
+
+#  SOLUTION:
+
+
+#  METHODS---1
+# s ='abc121eab'
+
+# def first_non_repeating_character_brute_force(s):
+#     n = len(s)
+#     for i in range(n):
+#         is_repeating = False
+#         for j in range(n):
+#             if i != j and s[i] == s[j]:
+#                 is_repeating = True
+#                 break
+#         # If the character is not repeating, return its index
+#         if not is_repeating:
+#             return i
+#     return -1  # If no non-repeating character is found
+
+# # Example usage
+# input_str = 'abc121eab'
+# result = first_non_repeating_character_brute_force(input_str)
+# print(f"The index of the first non-repeating character is: {result}")
+
+
+
+
+#  methods-2
+
+# def first_non_repeating_character(s):
+#     # Step 1: Create a frequency dictionary
+#     frequency = {}
+#     for char in s:
+#         if char in frequency:
+#             frequency[char] += 1
+#         else:
+#             frequency[char] = 1
+
+#     # Step 2: Find the first non-repeating character
+#     for index, char in enumerate(s):
+#         if frequency[char] == 1:
+#             return index
+
+#     return -1  # If no non-repeating character is found
+
+# # Example usage
+# input_str = 'abc121eab'
+# result = first_non_repeating_character(input_str)
+# print(f"The index of the first non-repeating character is: {result}")
+
+
+
+
+
+
+
+#   42:
+
+
+# Palindrome-You are given a string. Write a function to check whether the string is a palindrome or not.
+# 
+# 
+# 
+# Try:
+# 
+# To optimise your solution. We will discuss 3 solutions with the following Time and Space complexities
+# 
+# Solution 1:
+# 
+# T=O(n^2) , S=O(n)
+# 
+# Solution 2:
+# 
+# T=O(n) , S=O(n)
+# 
+# Solution 3:
+# 
+# T=O(n) , S=O(1)
+
+
+
+
+
+#   solution::::::
+
+
+#  METHODS -1
+
+# def is_palindrome_brute_force(s):
+#     # Create a reversed version of the string and compare
+#     reversed_str = s[::-1]
+#     return s == reversed_str
+
+# # Example usage
+# input_str = "madam"
+# print(f"Is '{input_str}' a palindrome? {is_palindrome_brute_force(input_str)}")
+
+
+
+#  METHODS-2
+
+# def is_palindrome_recursive(s):
+#     # Base case: If the string is empty or has one character, it's a palindrome
+#     if len(s) <= 1:
+#         return True
+#     # Compare the first and last characters
+#     if s[0] == s[-1]:
+#         # Check the substring excluding the first and last characters
+#         return is_palindrome_recursive(s[1:-1])
+#     else:
+#         return False
+
+# # Example usage
+# input_str = "racecar"
+# print(f"Is '{input_str}' a palindrome? {is_palindrome_recursive(input_str)}")
+
+
+
+#  METHODS -3
+
+# def is_palindrome_optimized(s):
+#     left, right = 0, len(s) - 1
+    
+#     while left < right:
+#         # Compare characters at left and right pointers
+#         if s[left] != s[right]:
+#             return False
+#         # Move pointers inward
+#         left += 1
+#         right -= 1
+
+#     return True
+
+# # Example usage
+# input_str = "A man a plan a canal Panama".replace(" ", "").lower()  # Normalizing string (ignoring spaces and case)
+# print(f"Is '{input_str}' a palindrome? {is_palindrome_optimized(input_str)}")
+
+
+
+
+
+
+
+
+
+
+#  **************** Q 43:
+
+
+# Coding Exercise: Longest Sub string with Unique characters
+# Question:
+# 
+# Longest Unique char Substring - Given a string s, find the length of the longest substring without repeating characters.
+
+
+# def length_of_longest_substring(s):
+#     # Set to store characters in the current window
+#     char_set = set()
+#     left = 0  # Left pointer for the sliding window
+#     max_length = 0  # Variable to store the maximum length of substring
+
+#     # Traverse the string with the right pointer
+#     for right in range(len(s)):
+#         # If the character is already in the set, move the left pointer
+#         while s[right] in char_set:
+#             # Remove the character at the left pointer and move the pointer to the right
+#             char_set.remove(s[left])
+#             left += 1
+        
+#         # Add the character at the right pointer to the set
+#         char_set.add(s[right])
+#         # Update max_length if the current window length is greater
+#         max_length = max(max_length, right - left + 1)
+
+#     return max_length
+
+# # Example usage
+# input_str = "abcabcbb"
+# print(f"The length of the longest substring without repeating characters is: {length_of_longest_substring(input_str)}")
+
+
+
+
+
+
+
+
+#  Q 44 >>>>
+
+# Group Anagrams
+# Question:
+# 
+# Group Anagrams - Given an array of strings consisting of lower case English letters, group the anagrams together. You can return the answer in any order. An Anagram is a word or phrase formed by rearranging the letters of a different word or phrase, using all the original letters exactly once.
+
+
+
+#  SOLUTION >>>>>>>>>>>>>>>>>>>
+
+
+#  METHODS-1
+
+# from collections import defaultdict
+
+# def group_anagrams(strs):
+#     # Initialize a default dictionary where each value is a list.
+#     anagrams = defaultdict(list)
+
+#     # Traverse each word in the given list.
+#     for word in strs:
+#         # Sort the word and use it as the key.
+#         sorted_word = ''.join(sorted(word))
+        
+#         # Add the original word to the list of its sorted version.
+#         anagrams[sorted_word].append(word)
+    
+#     # Return all grouped anagrams as a list of lists.
+#     return list(anagrams.values())
+
+# # Test with the provided example
+# input_strs = ["eat", "tea", "tan", "ate", "nat", "bat"]
+# output = group_anagrams(input_strs)
+# print(output)
+
+
+
+#  METHODS----2:
+
+# def group_anagram(strings):
+#     if len(strings) ==0:
+#         return []
+    
+#     sorted_string =[''.join(sorted(i) for i in strings)]
+#     hash ={}
+
+#     for i in range(len(sorted_string)):
+#         if sorted_string[i] in hash:
+#             hash[sorted_string[i]].append(strings[i])
+#         else:
+#             hash[sorted_string[i]] =[strings[i]]
+#     return list(hash.values())        
+
+
+
+
+
+
+
+
+#  Q 45.............................
+
+#  ................. BINARY SEARCH ...................
+
+
+#  Q 45 >.............
+
+# Binary Search Algorithm
+# Question:
+# 
+# Binary Search - Given an array of integers which is sorted in ascending order, and a target integer, write a function to search for whether the target integer is there in the given array. If it is there then return its index. Otherwise, return -1. You must write an algorithm with O(log n) runtime complexity.
+# 
+
+
+
+# def binary_search(arr, target):
+#     # Initialize pointers
+#     left, right = 0, len(arr) - 1
+    
+#     # While there is a search space
+#     while left <= right:
+#         # Find the middle element
+#         mid = (left + right) // 2
+        
+#         # Check if the target is found
+#         if arr[mid] == target:
+#             return mid
+        
+#         # If target is smaller, narrow down to left half
+#         elif arr[mid] > target:
+#             right = mid - 1
+        
+#         # If target is larger, narrow down to right half
+#         else:
+#             left = mid + 1
+    
+#     # If target is not found, return -1
+#     return -1
+
+# # Test the iterative approach
+# arr = [1, 3, 5, 7, 9, 11, 13, 15, 17, 19]
+# target = 7
+# result = binary_search(arr, target)
+# print(f"Target {target} found at index: {result}")  # Output: Target 7 found at index: 3
+
+
+
+
+
+
+
+#   Q 46>>>>>>>>>>>>>>>>
+
+# Search in rotated sorted array
+# Question:
+# 
+# Search in Rotated Sorted array- You are given an integer array nums sorted in ascending order (with distinct values). Prior to being passed to your function, nums is possibly rotated at an unknown pivot index k (1 <= k < nums.length) such that the resulting array is [nums[k], nums[k+1], ..., nums[n-1], nums[0], nums[1], ..., nums[k-1]] (0-indexed).  For example, [0,1,2,4,5,6,7] might be rotated at pivot index 3 and become [4,5,6,7,0,1,2]. Given an integer target, return the index of target if it is in the array, else return -1. You must write an algorithm with O(log n) runtime complexity.
+
+
+
+#  SOLUTION>>>>>>>>>>>>
+
+# def search_rotated_sorted_array(nums,target):
+#     left =0
+#     right =len(nums)-1
+
+#     while left <= right:
+#         mid =(left+right)//2
+
+#         if nums[mid] ==target:
+#             return mid
+        
+#         if nums[left] <=nums[mid]:
+#             if target >=nums[left] and target < nums[mid]:
+#                 right =mid-1
+#             else:
+#                 left = mid+1
+#         else:
+#             if target <=nums[right] and target > nums[mid]:
+#                 left =mid+1
+#             else:
+#                 right =mid-1
+#     return -1            
+
+
+
+
+
+
+
+
+
+
+
+
+
+#  Q 47 >>>>>>>>>>>>>>
+
+# Search for range
+# Question:
+# 
+# Find First and Last Position of Element in Sorted Array-You are given an array of integers sorted in non-decreasing order, find the starting and ending position of a given target value. If target is not found in the array, return [-1, -1]. You must write an algorithm with O(log n) runtime complexity.
+# 
+# Try:
+# 
+# Try to write both the iterative solution and recursive solution
+
+
+
+#  METHODS---1............... ITERATIVE APPROACH
+
+def search_for_range(array,target):
+
+    #  HELPER TO FIND FIRST OCCURANCE
+    def find_first_position(array, target):
+        left, right=0, len(array)-1
+        first_pos =-1
+
+        while left <=right:
+            mid =(left+right) //2
+
+            if array[mid] == target:
+                first_pos =mid
+                right =mid-1
+            elif array[mid] < target:
+                left =mid+1
+            else:
+                right =mid-1
+        return first_pos     
+
+
+            #    HELPER TO FIND LAST OCCURANCE
+
+    def find_last_occurance(array, target):
+        left, right =0, len(array)-1
+        last_pos =-1
+        while left<=right:
+            mid =(left+right)//2
+            if array[mid] ==target:
+                last_pos =mid
+                left =mid+1
+            elif array[mid] <target:
+                left =mid+1
+            else:
+                right =mid-1
+        return last_pos
+
+    first_pos =find_first_position(array, target)
+    last_pos =find_last_occurance(array, target)    
+
+    return [first_pos, last_pos]                    
